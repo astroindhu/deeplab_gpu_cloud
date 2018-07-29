@@ -66,7 +66,7 @@ TF_INIT_ROOT="http://download.tensorflow.org/models"
 TF_INIT_CKPT="deeplabv3_pascal_train_aug_2018_01_04.tar.gz"
 cd "${INIT_FOLDER}"
 wget -nd -c "${TF_INIT_ROOT}/${TF_INIT_CKPT}"
-tar -xf "${TF_INIT_CKPT}"
+tar -xf "${TF_INIT_CKPT}" --no-same-owner
 cd "${CURRENT_DIR}"
 
 PASCAL_DATASET="${WORK_DIR}/${DATASET_DIR}/${PASCAL_FOLDER}/tfrecord"
