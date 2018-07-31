@@ -36,6 +36,11 @@ and so on) for urban street scenes.
 The ADE20K dataset contains 150 semantic labels both urban street scenes and
 indoor scenes.
 
+4. Informal Settlements dataset
+
+The Informal Settlements dataset contains 1617 VHR satellite images with semantic binary labels
+for informal settlements (e.g., slums, unplanned settlements, poor neighbourhoods).
+
 References:
   M. Everingham, S. M. A. Eslami, L. V. Gool, C. K. I. Williams, J. Winn,
   and A. Zisserman, The pascal visual object classes challenge a retrospective.
@@ -108,11 +113,19 @@ _ADE20K_INFORMATION = DatasetDescriptor(
     ignore_label=0,
 )
 
+_INF_SET_INFORMATION = DatasetDescriptor(
+    splits_to_sizes={
+        'train': 1294,  # num of samples in images/training
+        'val': 323,  # num of samples in images/validation
+    },
+    num_classes=2,
+)
 
 _DATASETS_INFORMATION = {
     'cityscapes': _CITYSCAPES_INFORMATION,
     'pascal_voc_seg': _PASCAL_VOC_SEG_INFORMATION,
     'ade20k': _ADE20K_INFORMATION,
+	'inf_set': _INF_SET_INFORMATION,
 }
 
 # Default file pattern of TFRecord of TensorFlow Example.
