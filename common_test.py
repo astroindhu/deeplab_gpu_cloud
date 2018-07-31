@@ -18,7 +18,7 @@ import copy
 
 import tensorflow as tf
 
-from deeplab import common
+from deeplab_gpu_cloud_gpu_cloud import common
 
 
 class CommonTest(tf.test.TestCase):
