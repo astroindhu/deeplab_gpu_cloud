@@ -125,7 +125,7 @@ _DATASETS_INFORMATION = {
     'cityscapes': _CITYSCAPES_INFORMATION,
     'pascal_voc_seg': _PASCAL_VOC_SEG_INFORMATION,
     'ade20k': _ADE20K_INFORMATION,
-	'inf_set': _INF_SET_INFORMATION,
+    'inf_set': _INF_SET_INFORMATION,
 }
 
 # Default file pattern of TFRecord of TensorFlow Example.
@@ -151,7 +151,7 @@ def get_dataset(dataset_name, split_name, dataset_dir):
     ValueError: if the dataset_name or split_name is not recognized.
   """
   if dataset_name not in _DATASETS_INFORMATION:
-    raise ValueError('The specified dataset is not supported yet.')
+    raise ValueError('The specified dataset %s is not supported yet.' % dataset_name)
 
   splits_to_sizes = _DATASETS_INFORMATION[dataset_name].splits_to_sizes
 
