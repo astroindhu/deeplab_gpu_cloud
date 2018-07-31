@@ -119,6 +119,7 @@ _INF_SET_INFORMATION = DatasetDescriptor(
         'val': 323,  # num of samples in images/validation
     },
     num_classes=2,
+    ignore_label=255, 
 )
 
 _DATASETS_INFORMATION = {
