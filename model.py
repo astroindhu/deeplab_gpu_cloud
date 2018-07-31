@@ -52,7 +52,7 @@ Alan L. Yuille (* equal contribution)
 (https://arxiv.org/abs/1412.7062)
 """
 import tensorflow as tf
-from deeplab.core import feature_extractor
+from deeplab_gpu_cloud.core import feature_extractor
 
 slim = tf.contrib.slim
 

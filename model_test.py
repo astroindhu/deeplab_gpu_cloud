@@ -17,8 +17,8 @@
 
 import tensorflow as tf
 
-from deeplab import common
-from deeplab import model
+from deeplab_gpu_cloud import common
+from deeplab_gpu_cloud import model
 
 
 class DeeplabModelTest(tf.test.TestCase):

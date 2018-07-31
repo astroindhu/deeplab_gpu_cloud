@@ -17,7 +17,7 @@
 import six
 
 import tensorflow as tf
-from deeplab.core import preprocess_utils
+from deeplab_gpu_cloud.core import preprocess_utils
 
 slim = tf.contrib.slim
 
