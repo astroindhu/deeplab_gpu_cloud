@@ -14,14 +14,24 @@
 # limitations under the License.
 # ==============================================================================
 #
-# This script is used to run local test on PASCAL VOC 2012. Users could also
+# This script is used to run local test on a dataset. Users could also
 # modify from this script for their use case.
 #
 # Usage:
-#   # From the tensorflow/models/research/deeplab directory.
-#   sh ./local_test.sh
+#   # From the tensorflow/models/research/deeplab_gpu_cloud directory.
+#   sh ./local_test.sh <DATASET> <NUM_TRAIN_ITERATIONS> <INITIAL_LEARNING_RATE>
 #
 #
+
+# Simple way to slip in basic parameters in a docker container (for example in a cloud environment)
+if [[ $# -eq 3 ]] ; then
+    echo 'Usage: sh ./local_test.sh <DATASET> <NUM_TRAIN_ITERATIONS> <INITIAL_LEARNING_RATE>'
+    exit 1
+fi
+
+DATASET=$1
+NUM_TRAIN_ITERATIONS=$2
+INITIAL_LEARNING_RATE=$3
 
 # Exit immediately if a command exits with a non-zero status.
 set -e
@@ -34,28 +44,29 @@ export PYTHONPATH=$PYTHONPATH:`pwd`:`pwd`/slim
 
 # Set up the working environment.
 CURRENT_DIR=$(pwd)
-WORK_DIR="${CURRENT_DIR}/deeplab"
+WORK_DIR="${CURRENT_DIR}/deeplab_gpu_cloud"
 EXP_DIR="/results"
+
+DATASET_TF_RECORD="${WORK_DIR}/${DATASET_DIR}/${DATASET}/tfrecord"
 
 # Run model_test first to make sure the PYTHONPATH is correctly set.
 python "${WORK_DIR}"/model_test.py -v
 
-# Go to datasets folder and download PASCAL VOC 2012 segmentation dataset.
+# Go to datasets folder and convert the dataset.
 DATASET_DIR="datasets"
 cd "${WORK_DIR}/${DATASET_DIR}"
-sh download_and_convert_voc2012.sh
+sh convert_"${DATASET}".sh
 
 # Go back to original directory.
 cd "${CURRENT_DIR}"
 
 # Set up the working directories.
-PASCAL_FOLDER="pascal_voc_seg"
 EXP_FOLDER="exp/train_on_trainval_set"
-INIT_FOLDER="${EXP_DIR}/${DATASET_DIR}/${PASCAL_FOLDER}/init_models"
-TRAIN_LOGDIR="${EXP_DIR}/${DATASET_DIR}/${PASCAL_FOLDER}/${EXP_FOLDER}/train"
-EVAL_LOGDIR="${EXP_DIR}/${DATASET_DIR}/${PASCAL_FOLDER}/${EXP_FOLDER}/eval"
-VIS_LOGDIR="${EXP_DIR}/${DATASET_DIR}/${PASCAL_FOLDER}/${EXP_FOLDER}/vis"
-EXPORT_DIR="${EXP_DIR}/${DATASET_DIR}/${PASCAL_FOLDER}/${EXP_FOLDER}/export"
+INIT_FOLDER="${EXP_DIR}/${DATASET_DIR}/${DATASET}/init_models"
+TRAIN_LOGDIR="${EXP_DIR}/${DATASET_DIR}/${DATASET}/${EXP_FOLDER}/train"
+EVAL_LOGDIR="${EXP_DIR}/${DATASET_DIR}/${DATASET}/${EXP_FOLDER}/eval"
+VIS_LOGDIR="${EXP_DIR}/${DATASET_DIR}/${DATASET}/${EXP_FOLDER}/vis"
+EXPORT_DIR="${EXP_DIR}/${DATASET_DIR}/${DATASET}/${EXP_FOLDER}/export"
 mkdir -p "${INIT_FOLDER}"
 mkdir -p "${TRAIN_LOGDIR}"
 mkdir -p "${EVAL_LOGDIR}"
@@ -70,13 +81,11 @@ wget -nd -c "${TF_INIT_ROOT}/${TF_INIT_CKPT}"
 tar -xf "${TF_INIT_CKPT}" --no-same-owner
 cd "${CURRENT_DIR}"
 
-PASCAL_DATASET="${WORK_DIR}/${DATASET_DIR}/${PASCAL_FOLDER}/tfrecord"
-
 # Train 10 iterations.
-NUM_ITERATIONS=10
 python "${WORK_DIR}"/train.py \
   --logtostderr \
-  --train_split="trainval" \
+  --train_split="train" \
+  --base_learning_rate="${INITIAL_LEARNING_RATE}" \
   --model_variant="xception_65" \
   --atrous_rates=6 \
   --atrous_rates=12 \
@@ -86,15 +95,15 @@ python "${WORK_DIR}"/train.py \
   --train_crop_size=513 \
   --train_crop_size=513 \
   --train_batch_size=4 \
-  --training_number_of_steps="${NUM_ITERATIONS}" \
+  --training_number_of_steps="${NUM_TRAIN_ITERATIONS}" \
   --fine_tune_batch_norm=true \
+  --initialize_last_layer=false \
   --tf_initial_checkpoint="${INIT_FOLDER}/deeplabv3_pascal_train_aug/model.ckpt" \
   --train_logdir="${TRAIN_LOGDIR}" \
-  --dataset_dir="${PASCAL_DATASET}"
+  --dataset="${DATASET}" \
+  --dataset_dir="${DATASET_TF_RECORD}"
 
-# Run evaluation. This performs eval over the full val split (1449 images) and
-# will take a while.
-# Using the provided checkpoint, one should expect mIOU=82.20%.
+# Run evaluation. This performs eval over the full val split.
 python "${WORK_DIR}"/eval.py \
   --logtostderr \
   --eval_split="val" \
@@ -108,7 +117,8 @@ python "${WORK_DIR}"/eval.py \
   --eval_crop_size=513 \
   --checkpoint_dir="${TRAIN_LOGDIR}" \
   --eval_logdir="${EVAL_LOGDIR}" \
-  --dataset_dir="${PASCAL_DATASET}" \
+  --dataset="${DATASET}" \
+  --dataset_dir="${DATASET_TF_RECORD}" \
   --max_number_of_evaluations=1
 
 # Visualize the results.
@@ -125,7 +135,8 @@ python "${WORK_DIR}"/vis.py \
   --vis_crop_size=513 \
   --checkpoint_dir="${TRAIN_LOGDIR}" \
   --vis_logdir="${VIS_LOGDIR}" \
-  --dataset_dir="${PASCAL_DATASET}" \
+  --dataset="${DATASET}" \
+  --dataset_dir="${DATASET_TF_RECORD}" \
   --max_number_of_iterations=1
 
 # Export the trained checkpoint.
@@ -142,7 +153,7 @@ python "${WORK_DIR}"/export_model.py \
   --atrous_rates=18 \
   --output_stride=16 \
   --decoder_output_stride=4 \
-  --num_classes=21 \
+  --num_classes=2 \
   --crop_size=513 \
   --crop_size=513 \
   --inference_scales=1.0
