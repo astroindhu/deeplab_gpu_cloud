@@ -24,14 +24,15 @@
 #
 
 # Simple way to slip in basic parameters in a docker container (for example in a cloud environment)
-if [[ $# -eq 3 ]] ; then
-    echo 'Usage: sh ./local_test.sh <DATASET> <NUM_TRAIN_ITERATIONS> <INITIAL_LEARNING_RATE>'
+if [[ $# -eq 4 ]] ; then
+    echo 'Usage: sh ./local_test.sh <DATASET> <NUM_CLASSES> <NUM_TRAIN_ITERATIONS> <INITIAL_LEARNING_RATE>'
     exit 1
 fi
 
 DATASET=$1
-NUM_TRAIN_ITERATIONS=$2
-INITIAL_LEARNING_RATE=$3
+NUM_CLASSES=$2
+NUM_TRAIN_ITERATIONS=$3
+INITIAL_LEARNING_RATE=$4
 
 # Exit immediately if a command exits with a non-zero status.
 set -e
@@ -84,7 +85,7 @@ cd "${CURRENT_DIR}"
 # Train 10 iterations.
 python "${WORK_DIR}"/train.py \
   --logtostderr \
-  --train_split="train" \
+  --train_split="train" \ 
   --base_learning_rate="${INITIAL_LEARNING_RATE}" \
   --model_variant="xception_65" \
   --atrous_rates=6 \
@@ -97,7 +98,7 @@ python "${WORK_DIR}"/train.py \
   --train_batch_size=4 \
   --training_number_of_steps="${NUM_TRAIN_ITERATIONS}" \
   --fine_tune_batch_norm=true \
-  --initialize_last_layer=false \
+  --initialize_last_layer=false \ # Only if finetuning on another dataset with a different number of classes
   --tf_initial_checkpoint="${INIT_FOLDER}/deeplabv3_pascal_train_aug/model.ckpt" \
   --train_logdir="${TRAIN_LOGDIR}" \
   --dataset="${DATASET}" \
@@ -153,7 +154,7 @@ python "${WORK_DIR}"/export_model.py \
   --atrous_rates=18 \
   --output_stride=16 \
   --decoder_output_stride=4 \
-  --num_classes=2 \
+  --num_classes=${NUM_CLASSES} \
   --crop_size=513 \
   --crop_size=513 \
   --inference_scales=1.0
