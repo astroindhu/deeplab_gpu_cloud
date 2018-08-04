@@ -24,8 +24,8 @@
 #
 
 # Simple way to slip in basic parameters in a docker container (for example in a cloud environment)
-if [[ $# -eq 4 ]] ; then
-    echo 'Usage: sh ./local_test.sh <DATASET> <NUM_CLASSES> <NUM_TRAIN_ITERATIONS> <INITIAL_LEARNING_RATE>'
+if [[ $# -eq 5 ]] ; then
+    echo 'Usage: sh ./local_test.sh <DATASET> <NUM_CLASSES> <NUM_TRAIN_ITERATIONS> <INITIAL_LEARNING_RATE> <NUM_GPU>'
     exit 1
 fi
 
@@ -33,6 +33,7 @@ DATASET=$1
 NUM_CLASSES=$2
 NUM_TRAIN_ITERATIONS=$3
 INITIAL_LEARNING_RATE=$4
+NUM_GPU=$5
 
 # Exit immediately if a command exits with a non-zero status.
 set -e
@@ -82,9 +83,10 @@ wget -nd -c "${TF_INIT_ROOT}/${TF_INIT_CKPT}"
 tar -xf "${TF_INIT_CKPT}" --no-same-owner
 cd "${CURRENT_DIR}"
 
-# Train 10 iterations.
+# Train the model.
 python "${WORK_DIR}"/train.py \
   --logtostderr \
+  --num_clones=${NUM_GPU} \
   --train_split="train" \ 
   --base_learning_rate="${INITIAL_LEARNING_RATE}" \
   --model_variant="xception_65" \
@@ -95,7 +97,7 @@ python "${WORK_DIR}"/train.py \
   --decoder_output_stride=4 \
   --train_crop_size=513 \
   --train_crop_size=513 \
-  --train_batch_size=4 \
+  --train_batch_size=4 * ${NUM_GPU} \
   --training_number_of_steps="${NUM_TRAIN_ITERATIONS}" \
   --fine_tune_batch_norm=true \
   --initialize_last_layer=false \ # Only if finetuning on another dataset with a different number of classes
