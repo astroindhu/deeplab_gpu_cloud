@@ -99,7 +99,7 @@ python "${WORK_DIR}"/train.py \
   --decoder_output_stride=4 \
   --train_crop_size=513 \
   --train_crop_size=513 \
-  --train_batch_size=4 * ${NUM_GPU} \
+  --train_batch_size=$((4*${NUM_GPU})) \
   --training_number_of_steps="${NUM_TRAIN_ITERATIONS}" \
   --fine_tune_batch_norm=true \
   --initialize_last_layer=false \
