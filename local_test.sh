@@ -89,7 +89,7 @@ cd "${CURRENT_DIR}"
 python "${WORK_DIR}"/train.py \
   --logtostderr \
   --num_clones=${NUM_GPU} \
-  --train_split="train" \ 
+  --train_split="train" \
   --base_learning_rate="${INITIAL_LEARNING_RATE}" \
   --model_variant="xception_65" \
   --atrous_rates=6 \
@@ -102,7 +102,7 @@ python "${WORK_DIR}"/train.py \
   --train_batch_size=4 * ${NUM_GPU} \
   --training_number_of_steps="${NUM_TRAIN_ITERATIONS}" \
   --fine_tune_batch_norm=true \
-  --initialize_last_layer=false \ 
+  --initialize_last_layer=false \
   --tf_initial_checkpoint="${INIT_FOLDER}/deeplabv3_pascal_train_aug/model.ckpt" \
   --train_logdir="${TRAIN_LOGDIR}" \
   --dataset="${DATASET}" \
