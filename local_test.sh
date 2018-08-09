@@ -24,7 +24,7 @@
 #
 
 # Simple way to slip in basic parameters in a docker container (for example in a cloud environment)
-if [[ $# -eq 5 ]] ; then
+if [[ "$#" -ne 5 ]] ; then
     echo 'Usage: sh ./local_test.sh <DATASET> <NUM_CLASSES> <NUM_TRAIN_ITERATIONS> <INITIAL_LEARNING_RATE> <NUM_GPU>'
     exit 1
 fi
