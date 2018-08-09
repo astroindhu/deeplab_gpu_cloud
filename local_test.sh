@@ -47,6 +47,7 @@ export PYTHONPATH=$PYTHONPATH:`pwd`:`pwd`/slim
 # Set up the working environment.
 CURRENT_DIR=$(pwd)
 WORK_DIR="${CURRENT_DIR}/deeplab_gpu_cloud"
+DATASET_DIR="datasets"
 EXP_DIR="/results"
 
 DATASET_TF_RECORD="${WORK_DIR}/${DATASET_DIR}/${DATASET}/tfrecord"
@@ -55,7 +56,7 @@ DATASET_TF_RECORD="${WORK_DIR}/${DATASET_DIR}/${DATASET}/tfrecord"
 python "${WORK_DIR}"/model_test.py -v
 
 # Go to datasets folder and convert the dataset.
-DATASET_DIR="datasets"
+
 cd "${WORK_DIR}/${DATASET_DIR}"
 sh convert_"${DATASET}".sh
 
@@ -84,6 +85,7 @@ tar -xf "${TF_INIT_CKPT}" --no-same-owner
 cd "${CURRENT_DIR}"
 
 # Train the model.
+# initialize_last_layer=false only if finetuning on another dataset with a different number of classes
 python "${WORK_DIR}"/train.py \
   --logtostderr \
   --num_clones=${NUM_GPU} \
@@ -100,7 +102,7 @@ python "${WORK_DIR}"/train.py \
   --train_batch_size=4 * ${NUM_GPU} \
   --training_number_of_steps="${NUM_TRAIN_ITERATIONS}" \
   --fine_tune_batch_norm=true \
-  --initialize_last_layer=false \ # Only if finetuning on another dataset with a different number of classes
+  --initialize_last_layer=false \ 
   --tf_initial_checkpoint="${INIT_FOLDER}/deeplabv3_pascal_train_aug/model.ckpt" \
   --train_logdir="${TRAIN_LOGDIR}" \
   --dataset="${DATASET}" \
