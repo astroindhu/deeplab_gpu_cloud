@@ -13,18 +13,19 @@
 # limitations under the License.
 # ==============================================================================
 
-"""Converts Informal Settlements data to TFRecord file format with Example protos.
+"""Converts data to TFRecord file format with Example protos.
 
-Informal Settlements dataset is expected to have the following directory structure:
+The default dataset is the Informal Settlements dataset.
+The dataset is expected to have the following directory structure:
 
 Image folder:
-  ./inf_set/images
+  ./<DATASET>/images
   
 Semantic segmentation annotations:
-  ./inf_set/labels
+  ./<DATASET>/labels
 
 list folder:
-  ./inf_set
+  ./<DATASET>
 
 This script converts data into sharded data files and save at tfrecord folder.
 
