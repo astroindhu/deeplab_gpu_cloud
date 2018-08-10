@@ -58,7 +58,7 @@ python "${WORK_DIR}"/model_test.py -v
 # Go to datasets folder and convert the dataset.
 
 cd "${WORK_DIR}/${DATASET_DIR}"
-sh convert_"${DATASET}".sh
+sh convert_general.sh
 
 # Go back to original directory.
 cd "${CURRENT_DIR}"
