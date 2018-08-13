@@ -37,10 +37,15 @@ CURRENT_DIR=$(pwd)
 WORK_DIR="./${DATASET}"
 mkdir -p "${WORK_DIR}"
 
+
 # Build TFRecords of the dataset.
 # First, create output directory for storing TFRecords.
 OUTPUT_DIR="${WORK_DIR}/tfrecord"
 mkdir -p "${OUTPUT_DIR}"
+
+echo "Current_DIR $(pwd)"
+echo "WORK_DIR ${WORK_DIR}"
+echo "OUTPUT_DIR ${OUTPUT_DIR}"
 
 IMAGE_FOLDER="${WORK_DIR}/images"
 SEMANTIC_SEG_FOLDER="${WORK_DIR}/labels"
