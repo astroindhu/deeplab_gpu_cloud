@@ -122,11 +122,72 @@ _INF_SET_INFORMATION = DatasetDescriptor(
     ignore_label=255, 
 )
 
+_LOWER_512_INFORMATION = DatasetDescriptor(
+    splits_to_sizes={
+        'train': 58,  # num of samples in images/training
+        'val': 14,  # num of samples in images/validation
+    },
+    num_classes=2,
+    ignore_label=255, 
+)
+
+_KIBERA_512_INFORMATION = DatasetDescriptor(
+    splits_to_sizes={
+        'train': 250,  # num of samples in images/training
+        'val': 62,  # num of samples in images/validation
+    },
+    num_classes=2,
+    ignore_label=255, 
+)
+
+_EL_DAIEN_512_INFORMATION = DatasetDescriptor(
+    splits_to_sizes={
+        'train': 1987,  # num of samples in images/training
+        'val': 497,  # num of samples in images/validation
+    },
+    num_classes=2,
+    ignore_label=255, 
+)
+
+_Al_GENEINA_512_INFORMATION = DatasetDescriptor(
+    splits_to_sizes={
+        'train': 1479,  # num of samples in images/training
+        'val': 370,  # num of samples in images/validation
+    },
+    num_classes=2,
+    ignore_label=255, 
+)
+
+
+_KIBERA_AND_LOWER_512_INFORMATION = DatasetDescriptor(
+    splits_to_sizes={
+        'train': 308,  # num of samples in images/training
+        'val': 76,  # num of samples in images/validation
+    },
+    num_classes=2,
+    ignore_label=255, 
+)
+
+_ALL_512_INFORMATION = DatasetDescriptor(
+    splits_to_sizes={
+        'train': 3774,  # num of samples in images/training
+        'val': 943,  # num of samples in images/validation
+    },
+    num_classes=2,
+    ignore_label=255, 
+)
+
 _DATASETS_INFORMATION = {
     'cityscapes': _CITYSCAPES_INFORMATION,
     'pascal_voc_seg': _PASCAL_VOC_SEG_INFORMATION,
     'ade20k': _ADE20K_INFORMATION,
     'inf_set': _INF_SET_INFORMATION,
+    'el_daien_512': _EL_DAIEN_512_INFORMATION,
+    'al_geneina_512': _Al_GENEINA_512_INFORMATION,
+    'kibera_512':_KIBERA_512_INFORMATION,
+    'lower_512':_LOWER_512_INFORMATION,
+    'all_512':_ALL_512_INFORMATION,
+    'kibera_and_lower_512':_KIBERA_AND_LOWER_512_INFORMATION,
 }
 
 # Default file pattern of TFRecord of TensorFlow Example.
