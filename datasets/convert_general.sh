@@ -34,7 +34,7 @@ DATASET=$1
 set -e
 
 CURRENT_DIR=$(pwd)
-WORK_DIR="./${DATASET}"
+WORK_DIR="${CURRENT_DIR}/${DATASET}"
 mkdir -p "${WORK_DIR}"
 
 
