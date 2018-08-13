@@ -50,7 +50,7 @@ WORK_DIR="${CURRENT_DIR}/deeplab_gpu_cloud"
 DATASET_DIR="datasets"
 EXP_DIR="/results"
 
-DATASET_TF_RECORD="${WORK_DIR}/${DATASET_DIR}/${DATASET}/tfrecord"
+DATASET_TF_RECORD="${EXP_DIR}/${DATASET_DIR}/${DATASET}/tfrecord"
 
 # Run model_test first to make sure the PYTHONPATH is correctly set.
 python "${WORK_DIR}"/model_test.py -v
