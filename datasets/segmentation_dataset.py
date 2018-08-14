@@ -158,7 +158,6 @@ _Al_GENEINA_512_INFORMATION = DatasetDescriptor(
     ignore_label=255, 
 )
 
-
 _KIBERA_AND_LOWER_512_INFORMATION = DatasetDescriptor(
     splits_to_sizes={
         'train': 308,  # num of samples in images/training
@@ -177,6 +176,118 @@ _ALL_512_INFORMATION = DatasetDescriptor(
     ignore_label=255, 
 )
 
+### Start
+_ALL_WITHOUT_SUDAN_512_INFORMATION = DatasetDescriptor(
+    splits_to_sizes={
+        'train': ,  # num of samples in images/training
+        'val': ,  # num of samples in images/validation
+    },
+    num_classes=2,
+    ignore_label=255, 
+)
+
+_ALL_WITHOUT_SMALL_CITIES_512_INFORMATION = DatasetDescriptor(
+    splits_to_sizes={
+        'train': ,  # num of samples in images/training
+        'val': ,  # num of samples in images/validation
+    },
+    num_classes=2,
+    ignore_label=255, 
+)
+
+_LOWER_256_INFORMATION = DatasetDescriptor(
+    splits_to_sizes={
+        'train': ,  # num of samples in images/training
+        'val': ,  # num of samples in images/validation
+    },
+    num_classes=2,
+    ignore_label=255, 
+)
+
+_KIBERA_256_INFORMATION = DatasetDescriptor(
+    splits_to_sizes={
+        'train': ,  # num of samples in images/training
+        'val': ,  # num of samples in images/validation
+    },
+    num_classes=2,
+    ignore_label=255, 
+)
+
+_EL_DAIEN_256_INFORMATION = DatasetDescriptor(
+    splits_to_sizes={
+        'train': ,  # num of samples in images/training
+        'val': ,  # num of samples in images/validation
+    },
+    num_classes=2,
+    ignore_label=255, 
+)
+
+_Al_GENEINA_256_INFORMATION = DatasetDescriptor(
+    splits_to_sizes={
+        'train': ,  # num of samples in images/training
+        'val': ,  # num of samples in images/validation
+    },
+    num_classes=2,
+    ignore_label=255, 
+)
+
+_KIBERA_AND_LOWER_256_INFORMATION = DatasetDescriptor(
+    splits_to_sizes={
+        'train': ,  # num of samples in images/training
+        'val': ,  # num of samples in images/validation
+    },
+    num_classes=2,
+    ignore_label=255, 
+)
+
+_ALL_256_INFORMATION = DatasetDescriptor(
+    splits_to_sizes={
+        'train': 3774,  # num of samples in images/training
+        'val': 943,  # num of samples in images/validation
+    },
+    num_classes=2,
+    ignore_label=255, 
+)
+
+_ALL_WITHOUT_SUDAN_256_INFORMATION = DatasetDescriptor(
+    splits_to_sizes={
+        'train': ,  # num of samples in images/training
+        'val': ,  # num of samples in images/validation
+    },
+    num_classes=2,
+    ignore_label=255, 
+)
+
+_ALL_WITHOUT_SMALL_CITIES_256_INFORMATION = DatasetDescriptor(
+    splits_to_sizes={
+        'train': ,  # num of samples in images/training
+        'val': ,  # num of samples in images/validation
+    },
+    num_classes=2,
+    ignore_label=255, 
+)
+
+_MEDELLIN_256_INFORMATION = DatasetDescriptor(
+    splits_to_sizes={
+        'train': ,  # num of samples in images/training
+        'val': ,  # num of samples in images/validation
+    },
+    num_classes=2,
+    ignore_label=255, 
+)
+
+_MAKOKO_256_INFORMATION = DatasetDescriptor(
+    splits_to_sizes={
+        'train': ,  # num of samples in images/training
+        'val': ,  # num of samples in images/validation
+    },
+    num_classes=2,
+    ignore_label=255, 
+)
+
+### END
+
+
 _DATASETS_INFORMATION = {
     'cityscapes': _CITYSCAPES_INFORMATION,
     'pascal_voc_seg': _PASCAL_VOC_SEG_INFORMATION,
@@ -187,7 +298,19 @@ _DATASETS_INFORMATION = {
     'kibera_512':_KIBERA_512_INFORMATION,
     'lower_512':_LOWER_512_INFORMATION,
     'all_512':_ALL_512_INFORMATION,
+    'all_without_sudan_512':_ALL_WITHOUT_SUDAN_512_INFORMATION,
+    'all_without_small_cities_512':_ALL_WITHOUT_SMALL_CITIES_512_INFORMATION,
     'kibera_and_lower_512':_KIBERA_AND_LOWER_512_INFORMATION,
+    'el_daien_256': _EL_DAIEN_256_INFORMATION,
+    'al_geneina_256': _Al_GENEINA_256_INFORMATION,
+    'kibera_256':_KIBERA_256_INFORMATION,
+    'lower_256':_LOWER_256_INFORMATION,
+    'all_256':_ALL_256_INFORMATION,
+    'all_without_sudan_256':_ALL_WITHOUT_SUDAN_256_INFORMATION,
+    'all_without_small_cities_256':_ALL_WITHOUT_SMALL_CITIES_256_INFORMATION,
+    'kibera_and_lower_256':_KIBERA_AND_LOWER_256_INFORMATION,
+    'medellin_256':_MEDELLIN_256_INFORMATION,
+    'makoko_256':_MAKOKO_256_INFORMATION,
 }
 
 # Default file pattern of TFRecord of TensorFlow Example.
