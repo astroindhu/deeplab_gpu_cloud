@@ -176,71 +176,16 @@ _ALL_512_INFORMATION = DatasetDescriptor(
     ignore_label=255, 
 )
 
-### Start
 _ALL_WITHOUT_SUDAN_512_INFORMATION = DatasetDescriptor(
     splits_to_sizes={
-        'train': ,  # num of samples in images/training
-        'val': ,  # num of samples in images/validation
+        'train': 367,  # num of samples in images/training
+        'val': 91,  # num of samples in images/validation
     },
     num_classes=2,
     ignore_label=255, 
 )
 
 _ALL_WITHOUT_SMALL_CITIES_512_INFORMATION = DatasetDescriptor(
-    splits_to_sizes={
-        'train': ,  # num of samples in images/training
-        'val': ,  # num of samples in images/validation
-    },
-    num_classes=2,
-    ignore_label=255, 
-)
-
-_LOWER_256_INFORMATION = DatasetDescriptor(
-    splits_to_sizes={
-        'train': ,  # num of samples in images/training
-        'val': ,  # num of samples in images/validation
-    },
-    num_classes=2,
-    ignore_label=255, 
-)
-
-_KIBERA_256_INFORMATION = DatasetDescriptor(
-    splits_to_sizes={
-        'train': ,  # num of samples in images/training
-        'val': ,  # num of samples in images/validation
-    },
-    num_classes=2,
-    ignore_label=255, 
-)
-
-_EL_DAIEN_256_INFORMATION = DatasetDescriptor(
-    splits_to_sizes={
-        'train': ,  # num of samples in images/training
-        'val': ,  # num of samples in images/validation
-    },
-    num_classes=2,
-    ignore_label=255, 
-)
-
-_Al_GENEINA_256_INFORMATION = DatasetDescriptor(
-    splits_to_sizes={
-        'train': ,  # num of samples in images/training
-        'val': ,  # num of samples in images/validation
-    },
-    num_classes=2,
-    ignore_label=255, 
-)
-
-_KIBERA_AND_LOWER_256_INFORMATION = DatasetDescriptor(
-    splits_to_sizes={
-        'train': ,  # num of samples in images/training
-        'val': ,  # num of samples in images/validation
-    },
-    num_classes=2,
-    ignore_label=255, 
-)
-
-_ALL_256_INFORMATION = DatasetDescriptor(
     splits_to_sizes={
         'train': 3774,  # num of samples in images/training
         'val': 943,  # num of samples in images/validation
@@ -249,10 +194,64 @@ _ALL_256_INFORMATION = DatasetDescriptor(
     ignore_label=255, 
 )
 
+_LOWER_256_INFORMATION = DatasetDescriptor(
+    splits_to_sizes={
+        'train': 288,  # num of samples in images/training
+        'val': 72,  # num of samples in images/validation
+    },
+    num_classes=2,
+    ignore_label=255, 
+)
+
+_KIBERA_256_INFORMATION = DatasetDescriptor(
+    splits_to_sizes={
+        'train': 1018,  # num of samples in images/training
+        'val': 254,  # num of samples in images/validation
+    },
+    num_classes=2,
+    ignore_label=255, 
+)
+
+_EL_DAIEN_256_INFORMATION = DatasetDescriptor(
+    splits_to_sizes={
+        'train': 8035,  # num of samples in images/training
+        'val': 2009,  # num of samples in images/validation
+    },
+    num_classes=2,
+    ignore_label=255, 
+)
+
+_Al_GENEINA_256_INFORMATION = DatasetDescriptor(
+    splits_to_sizes={
+        'train': 5986,  # num of samples in images/training
+        'val': 1496,  # num of samples in images/validation
+    },
+    num_classes=2,
+    ignore_label=255, 
+)
+
+_KIBERA_AND_LOWER_256_INFORMATION = DatasetDescriptor(
+    splits_to_sizes={
+        'train': 1306,  # num of samples in images/training
+        'val': 326,  # num of samples in images/validation
+    },
+    num_classes=2,
+    ignore_label=255, 
+)
+
+_ALL_256_INFORMATION = DatasetDescriptor(
+    splits_to_sizes={
+        'train': 15597,  # num of samples in images/training
+        'val': 3898,  # num of samples in images/validation
+    },
+    num_classes=2,
+    ignore_label=255, 
+)
+
 _ALL_WITHOUT_SUDAN_256_INFORMATION = DatasetDescriptor(
     splits_to_sizes={
-        'train': ,  # num of samples in images/training
-        'val': ,  # num of samples in images/validation
+        'train': 1576,  # num of samples in images/training
+        'val': 393,  # num of samples in images/validation
     },
     num_classes=2,
     ignore_label=255, 
@@ -260,8 +259,8 @@ _ALL_WITHOUT_SUDAN_256_INFORMATION = DatasetDescriptor(
 
 _ALL_WITHOUT_SMALL_CITIES_256_INFORMATION = DatasetDescriptor(
     splits_to_sizes={
-        'train': ,  # num of samples in images/training
-        'val': ,  # num of samples in images/validation
+        'train': 15327,  # num of samples in images/training
+        'val': 3831,  # num of samples in images/validation
     },
     num_classes=2,
     ignore_label=255, 
@@ -269,8 +268,8 @@ _ALL_WITHOUT_SMALL_CITIES_256_INFORMATION = DatasetDescriptor(
 
 _MEDELLIN_256_INFORMATION = DatasetDescriptor(
     splits_to_sizes={
-        'train': ,  # num of samples in images/training
-        'val': ,  # num of samples in images/validation
+        'train': 94,  # num of samples in images/training
+        'val': 23,  # num of samples in images/validation
     },
     num_classes=2,
     ignore_label=255, 
@@ -278,15 +277,12 @@ _MEDELLIN_256_INFORMATION = DatasetDescriptor(
 
 _MAKOKO_256_INFORMATION = DatasetDescriptor(
     splits_to_sizes={
-        'train': ,  # num of samples in images/training
-        'val': ,  # num of samples in images/validation
+        'train': 176,  # num of samples in images/training
+        'val': 44,  # num of samples in images/validation
     },
     num_classes=2,
     ignore_label=255, 
 )
-
-### END
-
 
 _DATASETS_INFORMATION = {
     'cityscapes': _CITYSCAPES_INFORMATION,
